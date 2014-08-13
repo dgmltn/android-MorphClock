@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.bydavy.morpher.DigitalClockView
+            android:id="@+id/hours_minutes"
+            android:padding="@dimen/clock_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:textSize="@dimen/hhmm_font_size"
+            app:textThickness="@dimen/hhmm_font_thickness"
+            app:morphingDuration="3000"/>
+
+        <com.bydavy.morpher.DigitalClockView
+            android:id="@+id/seconds"
+            android:padding="@dimen/clock_padding"
+            android:layout_width="@dimen/ss_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:textSize="@dimen/ss_font_size"
+            app:textThickness="@dimen/ss_font_thickness"
+            app:morphingDuration="300"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/date_margin_top"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="@dimen/date_text_size"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:singleLine="true"
+        android:text="" />
+</merge>

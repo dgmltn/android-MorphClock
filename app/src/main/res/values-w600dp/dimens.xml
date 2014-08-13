@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hhmm_font_size">150dp</dimen>
+    <dimen name="hhmm_font_thickness">8dp</dimen>
+    <dimen name="ss_font_size">36dp</dimen>
+    <dimen name="ss_font_thickness">4dp</dimen>
+    <dimen name="clock_padding">6dp</dimen>
+    <dimen name="ss_width">60dp</dimen>
+    <dimen name="date_text_size">24sp</dimen>
+    <dimen name="date_margin_top">18dp</dimen>
+</resources>
