@@ -2,9 +2,13 @@ package com.dgmltn.morphclock.app;
 
 import java.text.SimpleDateFormat;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Point;
+import android.text.format.DateUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,6 +22,8 @@ import com.bydavy.morpher.font.DFont;
  */
 public class ClockContainerLayout extends LinearLayout implements SystemClockManager.SystemClockListener {
 
+	private static final String TAG = ClockContainerLayout.class.getSimpleName();
+
 	private static SimpleDateFormat sHoursMinutesFormat = new SimpleDateFormat("H:mm");
 	private static SimpleDateFormat sSecondsFormat = new SimpleDateFormat("ss");
 	private static SimpleDateFormat sDateFormat = new SimpleDateFormat("c, MMMM d");
@@ -28,7 +34,8 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 	private SystemClockManager mSystemClockManager;
 	private View mClockContainer;
 
-	String mLastTime = "";
+	long mHhmm = 0;
+	long mSs = 0;
 
 	public ClockContainerLayout(Context context) {
 		super(context);
@@ -53,6 +60,9 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 
 		// Setup the clock ticker
 		mSystemClockManager = new SystemClockManager(this);
+
+		mRelativePositionX = 0.5f;
+		mRelativePositionY = 0.5f;
 	}
 
 	@Override
@@ -73,6 +83,45 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 	}
 
 	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+
+		Point screen = Util.getScreenSize(getContext());
+		mScreenWidth = screen.x;
+		mScreenHeight = screen.y;
+
+		mWidth = w;
+		mHeight = h;
+
+		adjustRelativePositions();
+	}
+
+	private float mWidth, mHeight, mScreenWidth, mScreenHeight, mRelativePositionX, mRelativePositionY;
+
+	public void setRelativePositionX(float x) {
+		mRelativePositionX = x;
+		adjustRelativePositions();
+	}
+
+	public float getRelativePositionX() {
+		return mRelativePositionX;
+	}
+
+	public void setRelativePositionY(float y) {
+		mRelativePositionY = y;
+		adjustRelativePositions();
+	}
+
+	public float getRelativePositionY() {
+		return mRelativePositionY;
+	}
+
+	private void adjustRelativePositions() {
+		setTranslationX(mRelativePositionX * (mScreenWidth - mWidth));
+		setTranslationY(mRelativePositionY * (mScreenHeight - mHeight));
+	}
+
+	@Override
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
 		mSystemClockManager.stop();
@@ -80,34 +129,30 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 
 	@Override
 	public void onTimeChanged(long time) {
-		String thisTime = sHoursMinutesFormat.format(time);
 
-		// Hour/minute changed, move the clock around the screen a bit
-		if (!thisTime.equals(mLastTime) && mClockContainer.getWidth() > 0 && mClockContainer.getHeight() > 0) {
-			mLastTime = thisTime;
+		// Hour/minute
+		if (time / DateUtils.MINUTE_IN_MILLIS != mHhmm) {
+			AnimatorSet set = new AnimatorSet();
+			set.play(ObjectAnimator.ofFloat(this, "relativePositionX", (float) Math.random()))
+				.with(ObjectAnimator.ofFloat(this, "relativePositionY", (float) Math.random()));
+			set.setDuration(mHoursMinutesView.getMorphingDuration()).start();
 
-			Point screen = Util.getScreenSize(getContext());
+			// Useful when a long morphing duration is set otherwise we never see the destination number as it's always morphing
+			String hhmm = sHoursMinutesFormat.format(time);
+			mHoursMinutesView.setTime(hhmm, !mHoursMinutesView.isMorphingAnimationRunning());
 
-			int clockWidth = mClockContainer.getWidth();
-			int screenWidth = screen.x;
-			int clockHeight = mClockContainer.getHeight();
-			int screenHeight = screen.y;
-
-			double translateX = 0.9f * (Math.random() * (screenWidth - clockWidth) - this.getLeft());
-			double translateY = 0.9f * (Math.random() * (screenHeight - clockHeight) - this.getTop());
-
-			this.animate()
-				.translationX((float)translateX)
-				.translationY((float)translateY)
-				.setDuration(mHoursMinutesView.getMorphingDuration())
-				.start();
+			mHhmm = time / DateUtils.MINUTE_IN_MILLIS;
 		}
 
-		// Useful when a long morphing duration is set otherwise we never see the destination number as it's always morphing
-		mHoursMinutesView.setTime(thisTime, false /*!mHoursMinutesView.isMorphingAnimationRunning()*/);
+		// Second
+		if (time / DateUtils.SECOND_IN_MILLIS != mSs) {
+			mSs = time / DateUtils.SECOND_IN_MILLIS;
+			String ss = sSecondsFormat.format(time);
 
-		mSecondsView.setTime(sSecondsFormat.format(time), false /*!mSecondsView.isMorphingAnimationRunning()*/);
+			mSecondsView.setTime(ss, !mSecondsView.isMorphingAnimationRunning());
+		}
 
+		// Date
 		mDateView.setText(sDateFormat.format(time));
 	}
 

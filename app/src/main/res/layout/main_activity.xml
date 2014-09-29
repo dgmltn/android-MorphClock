@@ -6,7 +6,8 @@
 
     <com.dgmltn.morphclock.app.SkyView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layerType="hardware"/>
 
     <TextView
         android:id="@+id/fullscreen_content"
@@ -22,8 +23,7 @@
     <com.dgmltn.morphclock.app.ClockContainerLayout
         android:id="@+id/clock_container"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_width="wrap_content"/>
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->

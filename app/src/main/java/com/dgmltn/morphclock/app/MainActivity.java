@@ -55,10 +55,6 @@ public class MainActivity extends Activity {
 		final View content = LayoutInflater.from(this).inflate(R.layout.main_activity, null);
 		setContentView(content);
 
-		SkyDrawable bg = new SkyDrawable();
-		ObjectAnimator.ofFloat(bg, "sunAngle", 250f, 300f).setDuration(60000).start();
-		content.setBackground(bg);
-
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 

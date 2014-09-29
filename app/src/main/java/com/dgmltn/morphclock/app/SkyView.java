@@ -1,17 +1,29 @@
 package com.dgmltn.morphclock.app;
 
+import java.util.TimeZone;
+
 import android.content.Context;
+import android.graphics.Color;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
+import com.luckycatlabs.sunrisesunset.calculator.SolarEventCalculator;
+import com.luckycatlabs.sunrisesunset.dto.Location;
 
 /**
  * Created by dmelton on 8/10/14.
  */
 public class SkyView extends View implements SystemClockManager.SystemClockListener {
 
-	private SkyDrawable mBackground;
+	private static final String TAG = SkyView.class.getSimpleName();
+
+	private SkyLayerDrawable mBackground;
 	private SystemClockManager mSystemClockManager;
+
+	// Used for calculating the sun's angle
+	private SolarEventCalculator mCalculator;
 
 	public SkyView(Context context) {
 		super(context);
@@ -29,9 +41,14 @@ public class SkyView extends View implements SystemClockManager.SystemClockListe
 	}
 
 	private void init() {
-		mBackground = new SkyDrawable();
+		mBackground = new SkyLayerDrawable();
 		setBackground(mBackground);
 		mSystemClockManager = new SystemClockManager(this, 1);
+
+		Location location = new Location(33, -117);
+		TimeZone timeZone = TimeZone.getDefault();
+		mCalculator = new SolarEventCalculator(location, timeZone);
+		Log.e(TAG, "DOUG: location = " + location + ", timezone = " + timeZone);
 	}
 
 	@Override
@@ -48,7 +65,7 @@ public class SkyView extends View implements SystemClockManager.SystemClockListe
 
 	@Override
 	public void onTimeChanged(long time) {
-		long period = DateUtils.MINUTE_IN_MILLIS;
+		long period = DateUtils.DAY_IN_MILLIS;
 		long millis = Util.millisSinceMidnight(time);
 		float angle = 360f * (millis % period) / period;
 		mBackground.setSunAngle(angle);
