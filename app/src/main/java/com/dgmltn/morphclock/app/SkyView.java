@@ -1,16 +1,15 @@
 package com.dgmltn.morphclock.app;
 
-import java.util.TimeZone;
+import java.util.GregorianCalendar;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.luckycatlabs.sunrisesunset.calculator.SolarEventCalculator;
-import com.luckycatlabs.sunrisesunset.dto.Location;
+import net.e175.klaus.solarpositioning.AzimuthZenithAngle;
+import net.e175.klaus.solarpositioning.SPA;
 
 /**
  * Created by dmelton on 8/10/14.
@@ -22,8 +21,7 @@ public class SkyView extends View implements SystemClockManager.SystemClockListe
 	private SkyLayerDrawable mBackground;
 	private SystemClockManager mSystemClockManager;
 
-	// Used for calculating the sun's angle
-	private SolarEventCalculator mCalculator;
+	GregorianCalendar mCalendar;
 
 	public SkyView(Context context) {
 		super(context);
@@ -43,12 +41,8 @@ public class SkyView extends View implements SystemClockManager.SystemClockListe
 	private void init() {
 		mBackground = new SkyLayerDrawable();
 		setBackground(mBackground);
-		mSystemClockManager = new SystemClockManager(this, 1);
-
-		Location location = new Location(33, -117);
-		TimeZone timeZone = TimeZone.getDefault();
-		mCalculator = new SolarEventCalculator(location, timeZone);
-		Log.e(TAG, "DOUG: location = " + location + ", timezone = " + timeZone);
+		mSystemClockManager = new SystemClockManager(this, 1000);
+		mCalendar = new GregorianCalendar();
 	}
 
 	@Override
@@ -65,9 +59,11 @@ public class SkyView extends View implements SystemClockManager.SystemClockListe
 
 	@Override
 	public void onTimeChanged(long time) {
-		long period = DateUtils.DAY_IN_MILLIS;
-		long millis = Util.millisSinceMidnight(time);
-		float angle = 360f * (millis % period) / period;
+		mCalendar.setTimeInMillis(System.currentTimeMillis() + (int)(DateUtils.HOUR_IN_MILLIS));
+		AzimuthZenithAngle aza = SPA.calculateSolarPosition(mCalendar, 33, -117, 0, 67, 0, 0);
+		float zenithAngle = (float)aza.getZenithAngle();
+		float angle = mCalendar.getTime().getHours() < 12 ? 180 - zenithAngle : 180 + zenithAngle;
+			Log.e(TAG, "DOUG: angle = " + angle);
 		mBackground.setSunAngle(angle);
 	}
 }
