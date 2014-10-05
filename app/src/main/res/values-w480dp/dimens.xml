@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- phone in landscape -->
+
     <dimen name="hhmm_font_size">100dp</dimen>
     <dimen name="hhmm_font_thickness">5dp</dimen>
     <dimen name="ss_font_size">25dp</dimen>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 7" tablet in portrait -->
+
     <dimen name="hhmm_font_size">150dp</dimen>
     <dimen name="hhmm_font_thickness">8dp</dimen>
     <dimen name="ss_font_size">36dp</dimen>
