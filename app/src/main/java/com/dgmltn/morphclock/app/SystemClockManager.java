@@ -45,10 +45,10 @@ public class SystemClockManager implements TimeAnimator.TimeListener {
 
 	@Override
 	public void onTimeUpdate(TimeAnimator timeAnimator, long l, long l2) {
-		long now = System.currentTimeMillis() / mResolution;
+		long now = l / mResolution;
 		if (now != mLast) {
 			mLast = now;
-			mListener.onTimeChanged(now * mResolution);
+			mListener.onTimeChanged(System.currentTimeMillis());
 		}
 	}
 
