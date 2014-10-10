@@ -8,14 +8,12 @@ import android.content.Context;
 import android.graphics.Point;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bydavy.morpher.DigitalClockView;
-import com.bydavy.morpher.font.DFont;
 
 /**
  * Created by dmelton on 8/8/14.
@@ -34,6 +32,7 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 	private SystemClockManager mSystemClockManager;
 	private View mClockContainer;
 
+	String mDate;
 	long mHhmm = 0;
 	long mSs = 0;
 
@@ -142,6 +141,14 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 			mHoursMinutesView.setTime(hhmm, !mHoursMinutesView.isMorphingAnimationRunning());
 
 			mHhmm = time / DateUtils.MINUTE_IN_MILLIS;
+
+			// Date
+			// It's ok to only check this once per minute
+			String date = sDateFormat.format(time);
+			if (!date.equals(mDate)) {
+				mDate = date;
+				mDateView.setText(date);
+			}
 		}
 
 		// Second
@@ -151,9 +158,6 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 
 			mSecondsView.setTime(ss, !mSecondsView.isMorphingAnimationRunning());
 		}
-
-		// Date
-		mDateView.setText(sDateFormat.format(time));
 	}
 
 }
