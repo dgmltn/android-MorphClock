@@ -17,6 +17,7 @@ public class SkyLinearGradientDrawable extends LinearGradientDrawable {
 
 	/**
 	 * Sets the angle above the horizon of the sun. 90 = sunrise, 180 = sunset.
+	 *
 	 * @param angle
 	 * @return
 	 */
@@ -26,7 +27,7 @@ public class SkyLinearGradientDrawable extends LinearGradientDrawable {
 			alpha = 255;
 		}
 		else if (angle >= mStartAngle) {
-			alpha = (int)((angle - mStartAngle) / (mFullAngle - mStartAngle));
+			alpha = (int) (255 * (angle - mStartAngle) / (mFullAngle - mStartAngle));
 		}
 
 		if (alpha != mAlpha) {
