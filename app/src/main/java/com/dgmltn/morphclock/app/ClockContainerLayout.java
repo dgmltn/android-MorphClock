@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Point;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 
 	private static final String TAG = ClockContainerLayout.class.getSimpleName();
 
-	private static SimpleDateFormat sHoursMinutesFormat = new SimpleDateFormat("H:mm");
+	private static SimpleDateFormat sHoursMinutesFormat; // Initialized in init()
 	private static SimpleDateFormat sSecondsFormat = new SimpleDateFormat("ss");
 	private static SimpleDateFormat sDateFormat = new SimpleDateFormat("c, MMMM d");
 
@@ -30,7 +31,6 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 	private DigitalClockView mSecondsView;
 	private TextView mDateView;
 	private SystemClockManager mSystemClockManager;
-	private View mClockContainer;
 
 	String mDate;
 	long mHhmm = 0;
@@ -54,6 +54,13 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 	private void init(Context context) {
 		setOrientation(VERTICAL);
 
+		if (DateFormat.is24HourFormat(context)) {
+			sHoursMinutesFormat = new SimpleDateFormat("H:mm");
+		}
+		else {
+			sHoursMinutesFormat = new SimpleDateFormat("h:mm");
+		}
+
 		LayoutInflater inflater = LayoutInflater.from(context);
 		inflater.inflate(R.layout.widget_clock_container, this);
 
@@ -69,7 +76,6 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 		super.onFinishInflate();
 
 		// Set up the clock
-		mClockContainer = findViewById(R.id.clock_container);
 		mHoursMinutesView = (DigitalClockView) findViewById(R.id.hours_minutes);
 		mSecondsView = (DigitalClockView) findViewById(R.id.seconds);
 		mDateView = (TextView) findViewById(R.id.date);
