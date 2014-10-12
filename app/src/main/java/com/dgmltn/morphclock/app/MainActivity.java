@@ -1,5 +1,8 @@
 package com.dgmltn.morphclock.app;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -7,6 +10,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -55,7 +61,6 @@ public class MainActivity extends Activity {
 		final View content = LayoutInflater.from(this).inflate(R.layout.main_activity, null);
 		setContentView(content);
 
-		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 
 		// Set up an instance of SystemUiHider to control the system UI for
@@ -65,7 +70,6 @@ public class MainActivity extends Activity {
 		mSystemUiHider
 			.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
 				// Cached values.
-				int mControlsHeight;
 				int mShortAnimTime;
 
 				@Override
@@ -76,27 +80,22 @@ public class MainActivity extends Activity {
 						// (Honeycomb MR2 and later), use it to animate the
 						// in-layout UI controls at the bottom of the
 						// screen.
-						if (mControlsHeight == 0) {
-							mControlsHeight = controlsView.getHeight();
-						}
 						if (mShortAnimTime == 0) {
 							mShortAnimTime = getResources().getInteger(
 								android.R.integer.config_shortAnimTime);
 						}
-						controlsView.animate()
-							.translationY(visible ? 0 : mControlsHeight)
-							.setDuration(mShortAnimTime);
-					}
-					else {
-						// If the ViewPropertyAnimator APIs aren't
-						// available, simply show or hide the in-layout UI
-						// controls.
-						controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
 					}
 
 					if (visible && AUTO_HIDE) {
 						// Schedule a hide().
 						delayedHide(AUTO_HIDE_DELAY_MILLIS);
+					}
+
+					if (visible) {
+						getActionBar().show();
+					}
+					else {
+						getActionBar().hide();
 					}
 				}
 			});
@@ -105,7 +104,10 @@ public class MainActivity extends Activity {
 		contentView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (TOGGLE_ON_CLICK) {
+				if (isInfoViewShowing()) {
+					hideInfoView();
+				}
+				else if (TOGGLE_ON_CLICK) {
 					mSystemUiHider.toggle();
 				}
 				else {
@@ -113,11 +115,6 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-
-		// Upon interacting with UI controls, delay any scheduled hide()
-		// operations to prevent the jarring behavior of controls going away
-		// while interacting with the UI.
-		findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 	}
 
 	@Override
@@ -130,21 +127,76 @@ public class MainActivity extends Activity {
 		delayedHide(100);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
 
-	/**
-	 * Touch listener to use for in-layout UI controls to delay hiding the
-	 * system UI. This is to prevent the jarring behavior of controls going away
-	 * while interacting with activity UI.
-	 */
-	View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-		@Override
-		public boolean onTouch(View view, MotionEvent motionEvent) {
-			if (AUTO_HIDE) {
-				delayedHide(AUTO_HIDE_DELAY_MILLIS);
-			}
-			return false;
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.action_info:
+			showInfoView();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-	};
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (isInfoViewShowing()) {
+			hideInfoView();
+			return;
+		}
+		super.onBackPressed();
+	}
+
+	private void showInfoView() {
+		View view = Ui.findView(this, R.id.app_info_view);
+		view.setVisibility(View.VISIBLE);
+		ObjectAnimator showInfo = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+		ObjectAnimator scrollUp = ObjectAnimator.ofFloat(view, "translationY", 500, 0);
+
+		View clock = Ui.findView(this, R.id.clock_container);
+		ObjectAnimator hideClock = ObjectAnimator.ofFloat(clock, "alpha", 0f);
+
+		AnimatorSet set = new AnimatorSet();
+		set.playTogether(showInfo, scrollUp, hideClock);
+		set.start();
+
+		mHideHandler.removeCallbacks(mHideRunnable);
+	}
+
+	private boolean isInfoViewShowing() {
+		View view = Ui.findView(this, R.id.app_info_view);
+		return view.getVisibility() == View.VISIBLE;
+	}
+
+	private void hideInfoView() {
+		final View view = Ui.findView(this, R.id.app_info_view);
+		ObjectAnimator hideInfo = ObjectAnimator.ofFloat(view, "alpha", 0f);
+		ObjectAnimator scrollDown = ObjectAnimator.ofFloat(view, "translationY", 0, 500);
+
+		View clock = Ui.findView(this, R.id.clock_container);
+		ObjectAnimator showClock = ObjectAnimator.ofFloat(clock, "alpha", 1f);
+
+		AnimatorSet set = new AnimatorSet();
+		set.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				view.setVisibility(View.GONE);
+			}
+		});
+		set.playTogether(hideInfo, scrollDown, showClock);
+		set.start();
+
+		delayedHide(AUTO_HIDE_DELAY_MILLIS);
+	}
 
 	Handler mHideHandler = new Handler();
 	Runnable mHideRunnable = new Runnable() {

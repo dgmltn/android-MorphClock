@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppInfoView">
+        <item name="android:layout_width">600dp</item>
+        <item name="android:layout_height">600dp</item>
+        <item name="android:layout_margin">100dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

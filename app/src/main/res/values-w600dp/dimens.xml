@@ -10,4 +10,5 @@
     <dimen name="ss_width">60dp</dimen>
     <dimen name="date_text_size">24sp</dimen>
     <dimen name="date_margin_top">18dp</dimen>
+
 </resources>
