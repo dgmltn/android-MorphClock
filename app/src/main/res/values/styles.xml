@@ -31,4 +31,8 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="AppInfoScrollView">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
 </resources>

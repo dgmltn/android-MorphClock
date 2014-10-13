@@ -2,10 +2,19 @@
 <resources>
 
     <style name="AppInfoView">
-        <item name="android:layout_width">600dp</item>
-        <item name="android:layout_height">600dp</item>
-        <item name="android:layout_margin">100dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">96dp</item>
+        <item name="android:layout_marginBottom">96dp</item>
+        <item name="android:layout_marginLeft">48dp</item>
+        <item name="android:layout_marginRight">48dp</item>
         <item name="android:layout_gravity">center</item>
+        <item name="bounded_width">600dp</item>
+        <item name="bounded_height">600dp</item>
+    </style>
+
+    <style name="AppInfoScrollView">
+        <item name="android:fitsSystemWindows">false</item>
     </style>
 
 </resources>

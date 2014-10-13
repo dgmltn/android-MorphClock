@@ -3,247 +3,249 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:id="@+id/scroll_view"
+    <FrameLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        style="@style/AppInfoScrollView">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:text="@string/app_name"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="8dp"
-                android:background="#cccccc"/>
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
-                    android:src="@drawable/avatar_dgmltn"/>
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:text="@string/app_name"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#cccccc"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/copyright_doug_melton"/>
+                        android:layout_gravity="top"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/avatar_dgmltn"/>
 
-                    <TextView
-                        android:id="@+id/text_twitter_link_dgmltn"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/twitter_link_dgmltn"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/copyright_doug_melton"/>
+
+                        <TextView
+                            android:id="@+id/text_twitter_link_dgmltn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/twitter_link_dgmltn"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:text="@string/Daydream"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="8dp"
-                android:background="#cccccc"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/daydream_button"
-                    android:layout_width="?android:actionBarSize"
-                    android:layout_height="?android:actionBarSize"
-                    android:layout_gravity="center"
-                    android:scaleType="center"
-                    android:layout_alignParentRight="true"
-                    android:background="?android:actionBarItemBackground"
-                    android:src="@drawable/ic_action_gear"/>
-
                 <TextView
-                    android:id="@+id/text_daydream_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/daydream_button"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:text="@string/Daydream"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#cccccc"/>
+
+                <TextView
+                    android:id="@+id/daydream_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?android:actionBarSize"
+                    android:background="?android:actionBarItemBackground"
+                    android:drawableRight="@drawable/ic_action_gear"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical|left"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/daydream_description"/>
 
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:text="@string/Open_Source"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="8dp"
-                android:background="#cccccc"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/open_source_intro"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
-
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
-                    android:src="@drawable/avatar_davy"/>
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:text="@string/Open_Source"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#cccccc"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/open_source_intro"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp">
 
-                    <com.dgmltn.morphclock.app.ExternalLinkTextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:background="?android:actionBarItemBackground"
-                        android:drawableRight="@drawable/ic_external_link_arrow"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:text="@string/android_number_morphing"
-                        app:url="@string/android_number_morphing_url"/>
+                        android:layout_gravity="top"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/avatar_davy"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/copyright_davyleggieri"/>
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/text_mit_license_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/mit_license"/>
+                        <com.dgmltn.morphclock.app.ExternalLinkTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:background="?android:actionBarItemBackground"
+                            android:drawableRight="@drawable/ic_external_link_arrow"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold"
+                            android:text="@string/android_number_morphing"
+                            app:url="@string/android_number_morphing_url"/>
 
-                    <TextView
-                        android:id="@+id/text_twitter_link_davyleggieri"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/twitter_link_davyleggieri"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/copyright_davyleggieri"/>
 
-                    <TextView
-                        android:id="@+id/text_gplus_link_davyleggieri"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/gplus_link_davyleggieri"/>
+                        <TextView
+                            android:id="@+id/text_mit_license_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/mit_license"/>
 
+                        <TextView
+                            android:id="@+id/text_twitter_link_davyleggieri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/twitter_link_davyleggieri"/>
+
+                        <TextView
+                            android:id="@+id/text_gplus_link_davyleggieri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/gplus_link_davyleggieri"/>
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
-                    android:src="@drawable/avatar_klaus"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp">
 
-                    <com.dgmltn.morphclock.app.ExternalLinkTextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:background="?android:actionBarItemBackground"
-                        android:drawableRight="@drawable/ic_external_link_arrow"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:text="@string/solarpositioning"
-                        app:url="@string/solarpositioning_url"/>
+                        android:layout_gravity="top"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/avatar_klaus"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/copyright_Klaus_Brunner"/>
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/text_mit_license_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/mit_license"/>
+                        <com.dgmltn.morphclock.app.ExternalLinkTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:background="?android:actionBarItemBackground"
+                            android:drawableRight="@drawable/ic_external_link_arrow"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold"
+                            android:text="@string/solarpositioning"
+                            app:url="@string/solarpositioning_url"/>
 
-                    <TextView
-                        android:id="@+id/text_web_link_klausbrunner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/web_link_klausbrunner"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/copyright_Klaus_Brunner"/>
 
+                        <TextView
+                            android:id="@+id/text_mit_license_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/mit_license"/>
+
+                        <TextView
+                            android:id="@+id/text_web_link_klausbrunner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/web_link_klausbrunner"/>
+
+                    </LinearLayout>
                 </LinearLayout>
+
+                <!-- Extra bottom padding for scrollview -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
 
-    </ScrollView>
 </merge>

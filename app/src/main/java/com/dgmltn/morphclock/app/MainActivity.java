@@ -140,7 +140,12 @@ public class MainActivity extends Activity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.action_info:
-			showInfoView();
+			if (isInfoViewShowing()) {
+				hideInfoView();
+			}
+			else {
+				showInfoView();
+			}
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

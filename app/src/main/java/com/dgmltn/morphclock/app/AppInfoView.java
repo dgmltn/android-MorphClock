@@ -15,7 +15,7 @@ import android.widget.TextView;
 /**
  * Created by dmelton on 10/11/14.
  */
-public class AppInfoView extends FrameLayout {
+public class AppInfoView extends BoundedFrameLayout {
 
 	public AppInfoView(Context context) {
 		super(context);
