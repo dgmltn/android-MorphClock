@@ -110,7 +110,9 @@ public class MainActivity extends Activity {
 		// Trigger the initial hide() shortly after the activity has been
 		// created, to briefly hint to the user that UI controls
 		// are available.
-		delayedHide(100);
+		if (!isInfoViewShowing()) {
+			delayedHide(100);
+		}
 	}
 
 	@Override
