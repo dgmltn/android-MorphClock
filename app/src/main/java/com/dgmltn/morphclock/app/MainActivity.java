@@ -67,25 +67,11 @@ public class MainActivity extends Activity {
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
 		mSystemUiHider.setup();
-		mSystemUiHider
-			.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-				// Cached values.
-				int mShortAnimTime;
-
+		mSystemUiHider.setOnVisibilityChangeListener(
+			new SystemUiHider.OnVisibilityChangeListener() {
 				@Override
 				@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 				public void onVisibilityChange(boolean visible) {
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-						// If the ViewPropertyAnimator API is available
-						// (Honeycomb MR2 and later), use it to animate the
-						// in-layout UI controls at the bottom of the
-						// screen.
-						if (mShortAnimTime == 0) {
-							mShortAnimTime = getResources().getInteger(
-								android.R.integer.config_shortAnimTime);
-						}
-					}
-
 					if (visible && AUTO_HIDE) {
 						// Schedule a hide().
 						delayedHide(AUTO_HIDE_DELAY_MILLIS);
