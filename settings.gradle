@@ -3,3 +3,4 @@ include ':app'
 
 // Libraries
 include ':lib:android-number-morphing:library'
+include ':lib:solarpositioning'
