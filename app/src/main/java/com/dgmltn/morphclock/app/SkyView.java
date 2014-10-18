@@ -60,15 +60,23 @@ public class SkyView extends View implements SystemClockManager.SystemClockListe
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		mSystemClockManager.start();
-		mLocationManager.requestLocationUpdates(LOCATION_PROVIDER, 1000, 1000, this);
+		startTicking();
 	}
 
 	@Override
 	protected void onDetachedFromWindow() {
+		stopTicking();
+		super.onDetachedFromWindow();
+	}
+
+	public void startTicking() {
+		mSystemClockManager.start();
+		mLocationManager.requestLocationUpdates(LOCATION_PROVIDER, 1000, 1000, this);
+	}
+
+	public void stopTicking() {
 		mSystemClockManager.stop();
 		mLocationManager.removeUpdates(this);
-		super.onDetachedFromWindow();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////

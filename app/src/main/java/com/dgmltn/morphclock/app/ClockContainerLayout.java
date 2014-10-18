@@ -10,7 +10,6 @@ import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +33,6 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 
 	String mDate;
 	long mHhmm = 0;
-	long mSs = 0;
 
 	public ClockContainerLayout(Context context) {
 		super(context);
@@ -71,6 +69,14 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 		mRelativePositionY = 0.5f;
 	}
 
+	public void startTicking() {
+		mSystemClockManager.start();
+	}
+
+	public void stopTicking() {
+		mSystemClockManager.stop();
+	}
+
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
@@ -84,7 +90,7 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		mSystemClockManager.start();
+		startTicking();
 	}
 
 	@Override
@@ -128,8 +134,8 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 
 	@Override
 	protected void onDetachedFromWindow() {
+		stopTicking();
 		super.onDetachedFromWindow();
-		mSystemClockManager.stop();
 	}
 
 	@Override
@@ -158,12 +164,8 @@ public class ClockContainerLayout extends LinearLayout implements SystemClockMan
 		}
 
 		// Second
-		if (time / DateUtils.SECOND_IN_MILLIS != mSs) {
-			mSs = time / DateUtils.SECOND_IN_MILLIS;
-			String ss = sSecondsFormat.format(time);
-
-			mSecondsView.setTime(ss, !mSecondsView.isMorphingAnimationRunning());
-		}
+		String ss = sSecondsFormat.format(time);
+		mSecondsView.setTime(ss, !mSecondsView.isMorphingAnimationRunning());
 	}
 
 }

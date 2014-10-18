@@ -116,6 +116,24 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		ClockContainerLayout clock = Ui.findView(this, R.id.clock_container);
+		clock.startTicking();
+		SkyView sky = Ui.findView(this, R.id.sky);
+		sky.startTicking();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		ClockContainerLayout clock = Ui.findView(this, R.id.clock_container);
+		clock.stopTicking();
+		SkyView sky = Ui.findView(this, R.id.sky);
+		sky.stopTicking();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
 		MenuInflater inflater = getMenuInflater();
