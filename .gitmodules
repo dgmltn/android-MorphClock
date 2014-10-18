@@ -1,3 +1,6 @@
 [submodule "lib/android-number-morphing"]
 	path = lib/android-number-morphing
 	url = git@github.com:dgmltn/android-number-morphing.git
+[submodule "lib/solarpositioning"]
+	path = lib/solarpositioning
+	url = https://github.com/KlausBrunner/solarpositioning.git
