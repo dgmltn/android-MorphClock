@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Main -->
+    <!-- Principal -->
     <string name="app_name">MorphClock</string>
 
     <!-- Menus -->
     <string name="Info">Info</string>
 
-    <!-- About -->
+    <!-- À propos -->
     <string name="copyright_doug_melton">Copyright © 2014, Doug Melton</string>
     <string name="twitter_link_dgmltn"><a href="https://www.twitter.com/dgmltn">@dgmltn</a></string>
 
     <string name="Daydream">Daydream</string>
-    <string name="daydream_description">MorphClock can be set as your Daydream. Click here to configure your Daydream.</string>
+    <string name="daydream_description">MorphClock peut être défini comme votre Daydream. Cliquez ici pour configurer votre Daydream.</string>
 
     <string name="Open_Source">Open Source</string>
-    <string name="open_source_intro">This app is built upon great open source software.</string>
-    <string name="mit_license"><a href="http://opensource.org/licenses/MIT">MIT License</a></string>
-    <string name="apache_license"><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></string>
+    <string name="open_source_intro">Cette app est faite avec du super logiciel libre et open source.</string>
+    <string name="mit_license"><a href="http://opensource.org/licenses/MIT">Licence MIT</a></string>
+    <string name="apache_license"><a href="https://www.apache.org/licenses/LICENSE-2.0">Licence Apache, version 2.0</a></string>
 
     <string name="android_number_morphing">android-number-morphing</string>
     <string name="android_number_morphing_url">https://github.com/bydavy/android-number-morphing</string>
