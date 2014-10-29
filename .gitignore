@@ -33,3 +33,10 @@ build
 # Gradle related files
 .gradle
 .settings
+
+# Temp files
+*~
+#*#
+
+# Windows
+Thumbs.db
