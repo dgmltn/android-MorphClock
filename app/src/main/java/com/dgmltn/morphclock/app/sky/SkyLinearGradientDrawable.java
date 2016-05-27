@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dgmltn.morphclock.app;
+package com.dgmltn.morphclock.app.sky;
 
 /**
  * Created by dmelton on 8/13/14.

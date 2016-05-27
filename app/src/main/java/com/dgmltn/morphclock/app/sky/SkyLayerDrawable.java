@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.dgmltn.morphclock.app;
+package com.dgmltn.morphclock.app.sky;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.util.Log;
 
 /**
  * Created by dmelton on 8/8/14. Draws a gradient representing the sky at a particular sun

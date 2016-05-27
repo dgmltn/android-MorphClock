@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.dgmltn.morphclock.app;
+package com.dgmltn.morphclock.app.sky;
 
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.graphics.drawable.PaintDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
-import android.util.Log;
 
 /**
  * Created by dmelton on 8/13/14.

@@ -29,9 +29,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
+import com.dgmltn.morphclock.app.sky.SkyView;
 import com.dgmltn.morphclock.app.util.SystemUiHider;
 
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dgmltn.morphclock.app;
+package com.dgmltn.morphclock.app.sky;
 
 import java.util.GregorianCalendar;
 
@@ -26,6 +26,9 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.dgmltn.morphclock.app.SystemClockManager;
+import com.dgmltn.morphclock.app.Util;
 
 import net.e175.klaus.solarpositioning.AzimuthZenithAngle;
 import net.e175.klaus.solarpositioning.SPA;
